@@ -1,4 +1,4 @@
-var map, featureList, boroughSearch = [], theaterSearch = [], museumSearch = [];
+var map, featureList, theaterSearch = [], museumSearch = [];
 
 $(window).resize(function() {
   sizeLayerControl();
