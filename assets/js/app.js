@@ -206,7 +206,7 @@ var theaters = L.geoJson(null, {
     return L.marker(latlng, {
       icon: L.icon({
         iconUrl: "assets/img/theater.png",
-        iconSize: [44, 40],
+        iconSize: [34, 34], //map sizing
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
       }),
