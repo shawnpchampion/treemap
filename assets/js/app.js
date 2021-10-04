@@ -206,7 +206,7 @@ var theaters = L.geoJson(null, {
     return L.marker(latlng, {
       icon: L.icon({
         iconUrl: "assets/img/theater.png",
-        iconSize: [24, 28],
+        iconSize: [44, 40],
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
       }),
@@ -397,7 +397,7 @@ var baseLayers = {
 
 var groupedOverlays = {
   "Points of Interest": {
-    "<img src='assets/img/theater.png' width='24' height='28'>&nbsp;Theaters": theaterLayer, //sizes for control box
+    "<img src='assets/img/theater.png' width='44' height='40'>&nbsp;Theaters": theaterLayer, //sizes for control box
     "<img src='assets/img/museum.png' width='24' height='28'>&nbsp;Museums": museumLayer
   },
   "Reference": {
@@ -495,7 +495,7 @@ $(document).one("ajaxStop", function () {
     displayKey: "name",
     source: theatersBH.ttAdapter(),
     templates: {
-      header: "<h4 class='typeahead-header'><img src='assets/img/theater.png' width='44' height='40'>&nbsp;Theaters</h4>",
+      header: "<h4 class='typeahead-header'><img src='assets/img/theater.png' width='24' height='28'>&nbsp;Theaters</h4>", //unknown size
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
     }
   }, {
