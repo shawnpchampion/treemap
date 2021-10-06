@@ -1,4 +1,4 @@
-var map, featureList, theaterSearch = [], museumSearch = [];
+var map, featureList, theaterSearch = [], uluSearch = [], museumSearch = [];
 
 $(window).resize(function() {
   sizeLayerControl();
@@ -84,10 +84,20 @@ function syncSidebar() {
   $("#feature-list tbody").empty();
 
   /* Loop through theaters layer and add only features which are in the map bounds */
+  /* Contains icons size settings */
   theaters.eachLayer(function (layer) {
     if (map.hasLayer(theaterLayer)) {
       if (map.getBounds().contains(layer.getLatLng())) {
         $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/theater.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+      }
+    }
+  });
+  
+    /* Loop through ulu layer and add only features which are in the map bounds */
+  ulu.eachLayer(function (layer) {
+    if (map.hasLayer(uluLayer)) {
+      if (map.getBounds().contains(layer.getLatLng())) {
+        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/ulupin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       }
     }
   });
@@ -136,7 +146,7 @@ var highlightStyle = {
   stroke: false,
   fillColor: "#00FFFF",
   fillOpacity: 0.7,
-  radius: 10
+  radius: 5
 };
 
 
@@ -242,6 +252,51 @@ $.getJSON("data/DOITT_THEATER_01_13SEPT2010.geojson", function (data) {
   map.addLayer(theaterLayer);
 });
 
+
+/* Empty layer placeholder to add to layer control for listening when to add/remove ulu to markerClusters layer */
+var uluLayer = L.geoJson(null);
+var ulu = L.geoJson(null, {
+  pointToLayer: function (feature, latlng) {
+    return L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: "assets/img/ulupin.png",
+        iconSize: [34, 34],                                //map sizing
+        iconAnchor: [12, 28],
+        popupAnchor: [0, -25]
+      }),
+      title: feature.properties.NAME,
+      riseOnHover: true
+    });
+  },
+  onEachFeature: function (feature, layer) {
+    if (feature.properties) {
+      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADDRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
+      layer.on({
+        click: function (e) {
+          $("#feature-title").html(feature.properties.NAME);
+          $("#feature-info").html(content);
+          $("#featureModal").modal("show");
+          highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+        }
+      });
+      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/ulu.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+      uluSearch.push({
+        name: layer.feature.properties.NAME,
+        address: layer.feature.properties.ADDRESS1,
+        source: "ulu",
+        id: L.stamp(layer),
+        lat: layer.feature.geometry.coordinates[1],
+        lng: layer.feature.geometry.coordinates[0]
+      });
+    }
+  }
+});
+$.getJSON("data/ulu.geojson", function (data) {
+  ulu.addData(data);
+  map.addLayer(uluLayer);
+});
+
+
 /* Empty layer placeholder to add to layer control for listening when to add/remove museums to markerClusters layer */
 var museumLayer = L.geoJson(null);
 var museums = L.geoJson(null, {
@@ -298,6 +353,10 @@ map.on("overlayadd", function(e) {
     markerClusters.addLayer(theaters);
     syncSidebar();
   }
+  if (e.layer === uluLayer) {
+    markerClusters.addLayer(ulu);
+    syncSidebar();
+  }
   if (e.layer === museumLayer) {
     markerClusters.addLayer(museums);
     syncSidebar();
@@ -307,6 +366,10 @@ map.on("overlayadd", function(e) {
 map.on("overlayremove", function(e) {
   if (e.layer === theaterLayer) {
     markerClusters.removeLayer(theaters);
+    syncSidebar();
+  }
+  if (e.layer === uluLayer) {
+    markerClusters.removeLayer(ulu);
     syncSidebar();
   }
   if (e.layer === museumLayer) {
@@ -398,6 +461,7 @@ var baseLayers = {
 var groupedOverlays = {
   "Points of Interest": {
     "<img src='assets/img/theater.png' width='24' height='24'>&nbsp;Theaters": theaterLayer,              //sizes for control box
+    "<img src='assets/img/ulu.png' width='24' height='24'>&nbsp;ulu": uluLayer,
     "<img src='assets/img/museum.png' width='24' height='24'>&nbsp;Museums": museumLayer
   },
   "Reference": {
@@ -438,6 +502,16 @@ $(document).one("ajaxStop", function () {
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     local: theaterSearch,
+    limit: 10
+  });
+  
+  var uluBH = new Bloodhound({
+    name: "ulu",
+    datumTokenizer: function (d) {
+      return Bloodhound.tokenizers.whitespace(d.name);
+    },
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    local: uluSearch,
     limit: 10
   });
 
@@ -482,6 +556,7 @@ $(document).one("ajaxStop", function () {
     limit: 10
   });
   theatersBH.initialize();
+  uluBH.initialize();
   museumsBH.initialize();
   geonamesBH.initialize();
 
@@ -496,6 +571,14 @@ $(document).one("ajaxStop", function () {
     source: theatersBH.ttAdapter(),
     templates: {
       header: "<h4 class='typeahead-header'><img src='assets/img/theater.png' width='44' height='44'>&nbsp;Theaters</h4>", //unknown size
+      suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
+    }
+  }, {
+    name: "ulu",
+    displayKey: "name",
+    source: uluBH.ttAdapter(),
+    templates: {
+      header: "<h4 class='typeahead-header'><img src='assets/img/ulu.png' width='44' height='44'>&nbsp;ulu</h4>", //unknown size
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
     }
   }, {
@@ -517,6 +600,15 @@ $(document).one("ajaxStop", function () {
     if (datum.source === "Theaters") {
       if (!map.hasLayer(theaterLayer)) {
         map.addLayer(theaterLayer);
+      }
+      map.setView([datum.lat, datum.lng], 17);
+      if (map._layers[datum.id]) {
+        map._layers[datum.id].fire("click");
+      }
+    }
+    if (datum.source === "ulu") {
+      if (!map.hasLayer(uluLayer)) {
+        map.addLayer(uluLayer);
       }
       map.setView([datum.lat, datum.lng], 17);
       if (map._layers[datum.id]) {
