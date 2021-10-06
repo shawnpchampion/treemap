@@ -206,7 +206,7 @@ var theaters = L.geoJson(null, {
     return L.marker(latlng, {
       icon: L.icon({
         iconUrl: "assets/img/theater.png",
-        iconSize: [34, 34], //map sizing
+        iconSize: [34, 34],                                //map sizing
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
       }),
@@ -249,7 +249,7 @@ var museums = L.geoJson(null, {
     return L.marker(latlng, {
       icon: L.icon({
         iconUrl: "assets/img/museum.png",
-        iconSize: [34, 34],
+        iconSize: [34, 34],                                   // map sizing
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
       }),
@@ -397,8 +397,8 @@ var baseLayers = {
 
 var groupedOverlays = {
   "Points of Interest": {
-    "<img src='assets/img/theater.png' width='24' height='24'>&nbsp;Theaters": theaterLayer, //sizes for control box
-    "<img src='assets/img/museum.png' width='24' height='28'>&nbsp;Museums": museumLayer
+    "<img src='assets/img/theater.png' width='24' height='24'>&nbsp;Theaters": theaterLayer,              //sizes for control box
+    "<img src='assets/img/museum.png' width='24' height='24'>&nbsp;Museums": museumLayer
   },
   "Reference": {
     "Subway Lines": subwayLines
@@ -495,7 +495,7 @@ $(document).one("ajaxStop", function () {
     displayKey: "name",
     source: theatersBH.ttAdapter(),
     templates: {
-      header: "<h4 class='typeahead-header'><img src='assets/img/theater.png' width='24' height='28'>&nbsp;Theaters</h4>", //unknown size
+      header: "<h4 class='typeahead-header'><img src='assets/img/theater.png' width='14' height='14'>&nbsp;Theaters</h4>", //unknown size
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
     }
   }, {
@@ -503,7 +503,7 @@ $(document).one("ajaxStop", function () {
     displayKey: "name",
     source: museumsBH.ttAdapter(),
     templates: {
-      header: "<h4 class='typeahead-header'><img src='assets/img/museum.png' width='24' height='28'>&nbsp;Museums</h4>",
+      header: "<h4 class='typeahead-header'><img src='assets/img/museum.png' width='14' height='18'>&nbsp;Museums</h4>",
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
     }
   }, {
