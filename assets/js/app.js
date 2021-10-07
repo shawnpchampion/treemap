@@ -80,6 +80,12 @@ function sidebarClick(id) {
   }
 }
 
+var bgimgurl = "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg";
+var div = document.getElementById("bgimage");
+div.style.backgroundImage = `url(${bgimgurl})`;
+div.style.width = "640px";
+div.style.height = "374px";
+
 // Synch the sidebar with whats show on the screen
 function syncSidebar() {
   /* First Empty sidebar features */
