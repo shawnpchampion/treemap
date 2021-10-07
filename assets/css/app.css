@@ -91,6 +91,32 @@ input[type="radio"], input[type="checkbox"] {
 }
 */
 
+.modal-title {
+    margin: 0;
+    float: right;
+    line-height: 1.42857143;
+}
+
+.modal-header {
+    min-height: 16.43px;
+    padding: 15px;
+    /* border-bottom: 1px solid #e5e5e5; */
+}
+
+.modal-body {
+    position: relative;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-left: 300px;
+    padding-bottom: 15px;
+}
+
+.modal-footer {
+    padding: 15px;
+    text-align: right;
+    /* border-top: 1px solid #e5e5e5; */
+}
+
 .navbar .navbar-brand {
   font-weight: bold;
   font-size: 25px;
