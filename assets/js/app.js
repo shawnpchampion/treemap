@@ -300,6 +300,7 @@ var museums = L.geoJson(null, {
 });
 $.getJSON("data/DOITT_MUSEUM_01_13SEPT2010.geojson", function (data) {
   museums.addData(data);
+  map.addLayer(museumLayer);
 });
 
 // Add background image to point-marker pop up
