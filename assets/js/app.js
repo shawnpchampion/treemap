@@ -80,12 +80,13 @@ function sidebarClick(id) {
   }
 }
 // Add background image to point-marker pop up
-var bgimgurl = "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg";
+//var bgimgurl = "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg";
 //var bgimgurl = "./assets/img/uluback.png";
-//var bgimgurl = "feature.properties.backimage";
+var bgimgurl = 'url(' + feature.properties.backimage + ')';
 var div = document.getElementById("bgimage");
 //div.style.backgroundImage = `url(${feature.properties.backimage})`;
-div.style.backgroundImage = `url(${bgimgurl})`;
+//div.style.backgroundImage = `url(${bgimgurl})`;
+div.style.backgroundImage = bgimgurl;
 // div.style.width = "640px";
 // div.style.height = "100%";
 
