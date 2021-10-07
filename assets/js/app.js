@@ -79,8 +79,8 @@ function sidebarClick(id) {
     map.invalidateSize();
   }
 }
-
-var bgimgurl = "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg";
+// Add background image to point-marker pop up
+var bgimgurl = "./assets/img/uluback.png";
 var div = document.getElementById("bgimage");
 div.style.backgroundImage = `url(${bgimgurl})`;
 // div.style.width = "640px";
