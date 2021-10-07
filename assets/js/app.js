@@ -187,7 +187,7 @@ var theaters = L.geoJson(null, {
           var bgimgurlt = 'url(' + feature.properties.backimage + ')';
           var divt = document.getElementById("bgimage");
           divt.style.backgroundImage = bgimgurlt;
-          divt.style.background-repeat = no-repeat;
+          divt.style.background-repeat = "no-repeat";
         }
       });
       $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/theater.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
@@ -238,7 +238,7 @@ var ulu = L.geoJson(null, {
           var bgimgurlu = 'url(' + feature.properties.backimage + ')';
           var divu = document.getElementById("bgimage");
           divu.style.backgroundImage = bgimgurlu;
-          divu.style.background-repeat = no-repeat;
+          divu.style.background-repeat = "no-repeat";
         }
       });
       $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/ulupin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
@@ -288,7 +288,7 @@ var museums = L.geoJson(null, {
           var bgimgurlm = 'url(' + feature.properties.backimage + ')';
           var divm = document.getElementById("bgimage");
           divm.style.backgroundImage = bgimgurlm;
-          divm.style.background-repeat = no-repeat;
+          divm.style.background-repeat = "no-repeat";
         }
       });
       $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/museum.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
