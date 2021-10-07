@@ -80,11 +80,13 @@ function sidebarClick(id) {
   }
 }
 // Add background image to point-marker pop up
-var bgimgurl = "./assets/img/uluback.png";
+//var bgimgurl = "./assets/img/uluback.png";
+//var bgimgurl = "./assets/img/uluback.png";
 var div = document.getElementById("bgimage");
-div.style.backgroundImage = `url(${bgimgurl})`;
+div.style.backgroundImage = `url(${feature.properties.backimage})`;
+// div.style.backgroundImage = `url(${bgimgurl})`;
 // div.style.width = "640px";
-div.style.height = "100%";
+// div.style.height = "100%";
 
 // Synch the sidebar with whats show on the screen
 function syncSidebar() {
