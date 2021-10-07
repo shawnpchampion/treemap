@@ -177,6 +177,9 @@ var theaters = L.geoJson(null, {
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
       var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADDRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
+      var bgimgurl = 'url(' + feature.properties.backimage + ')';
+      var div = document.getElementById("bgimage");
+      div.style.backgroundImage = bgimgurl;
       layer.on({
         click: function (e) {
           $("#feature-title").html(feature.properties.NAME);
@@ -223,6 +226,9 @@ var ulu = L.geoJson(null, {
     if (feature.properties) {
 // "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
       var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Back</th><td>" + feature.properties.backimage + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADDRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
+      var bgimgurl = 'url(' + feature.properties.backimage + ')';
+      var div = document.getElementById("bgimage");
+      div.style.backgroundImage = bgimgurl;
       layer.on({  
         click: function (e) {
           $("#feature-title").html(feature.properties.NAME);
@@ -268,6 +274,9 @@ var museums = L.geoJson(null, {
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
       var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
+      var bgimgurl = 'url(' + feature.properties.backimage + ')';
+      var div = document.getElementById("bgimage");
+      div.style.backgroundImage = bgimgurl;
       layer.on({
         click: function (e) {
           $("#feature-title").html(feature.properties.NAME);
@@ -294,12 +303,12 @@ $.getJSON("data/DOITT_MUSEUM_01_13SEPT2010.geojson", function (data) {
 });
 
 // Add background image to point-marker pop up
-var bgimgurl = "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg";
+//var bgimgurl = "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg";
 //var bgimgurl = "./assets/img/uluback.png";
 //var bgimgurl = 'url(' + feature.properties.backimage + ')';
-var div = document.getElementById("bgimage");
+//var div = document.getElementById("bgimage");
 //div.style.backgroundImage = `url(${feature.properties.backimage})`;
-div.style.backgroundImage = `url(${bgimgurl})`;
+//div.style.backgroundImage = `url(${bgimgurl})`;
 //div.style.backgroundImage = bgimgurl;
 // div.style.width = "640px";
 // div.style.height = "100%";
