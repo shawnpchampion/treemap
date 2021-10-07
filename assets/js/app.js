@@ -419,6 +419,7 @@ var groupedOverlays = {
     "<img src='assets/img/theater.png' width='24' height='24'>&nbsp;Theaters": theaterLayer,              //sizes for control box
     "<img src='assets/img/ulupin.png' width='24' height='24'>&nbsp;ulu": uluLayer,
     "<img src='assets/img/museum.png' width='24' height='24'>&nbsp;Museums": museumLayer
+  }
 };
 
 // Create Control Box / Legend
