@@ -180,6 +180,7 @@ var theaters = L.geoJson(null, {
       layer.on({
         click: function (e) {
           $("#feature-title").html(feature.properties.NAME);
+          $("#feature-back").html(feature.properties.backimage);
           $("#feature-info").html(content);
           $("#featureModal").modal("show");
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
@@ -270,6 +271,7 @@ var museums = L.geoJson(null, {
       layer.on({
         click: function (e) {
           $("#feature-title").html(feature.properties.NAME);
+          $("#feature-back").html(feature.properties.backimage);
           $("#feature-info").html(content);
           $("#featureModal").modal("show");
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
