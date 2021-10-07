@@ -105,10 +105,11 @@ input[type="radio"], input[type="checkbox"] {
 
 .modal-body {
     position: relative;
-    padding-top: 15px;
-    padding-right: 15px;
-    padding-left: 300px;
-    padding-bottom: 15px;
+    padding-left: 50%;
+  /*  padding-top: 15px; */
+  /*  padding-right: 15px; */
+  /*  padding-left: 300px; */
+  /*  padding-bottom: 15px; */
 }
 
 .modal-footer {
