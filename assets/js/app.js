@@ -79,16 +79,7 @@ function sidebarClick(id) {
     map.invalidateSize();
   }
 }
-// Add background image to point-marker pop up
-//var bgimgurl = "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg";
-//var bgimgurl = "./assets/img/uluback.png";
-var bgimgurl = 'url(' + feature.properties.backimage + ')';
-var div = document.getElementById("bgimage");
-//div.style.backgroundImage = `url(${feature.properties.backimage})`;
-//div.style.backgroundImage = `url(${bgimgurl})`;
-div.style.backgroundImage = bgimgurl;
-// div.style.width = "640px";
-// div.style.height = "100%";
+
 
 // Synch the sidebar with whats show on the screen
 function syncSidebar() {
@@ -299,6 +290,17 @@ var museums = L.geoJson(null, {
 $.getJSON("data/DOITT_MUSEUM_01_13SEPT2010.geojson", function (data) {
   museums.addData(data);
 });
+
+// Add background image to point-marker pop up
+//var bgimgurl = "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg";
+//var bgimgurl = "./assets/img/uluback.png";
+var bgimgurl = 'url(' + feature.properties.backimage + ')';
+var div = document.getElementById("bgimage");
+//div.style.backgroundImage = `url(${feature.properties.backimage})`;
+//div.style.backgroundImage = `url(${bgimgurl})`;
+div.style.backgroundImage = bgimgurl;
+// div.style.width = "640px";
+// div.style.height = "100%";
 
 
 // Make the Leaflet Map
