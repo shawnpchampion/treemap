@@ -177,9 +177,9 @@ var theaters = L.geoJson(null, {
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
       var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADDRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
-      var bgimgurl = 'url(' + feature.properties.backimage + ')';
-      var div = document.getElementById("bgimage");
-      div.style.backgroundImage = bgimgurl;
+      var bgimgurlt = 'url(' + feature.properties.backimage + ')';
+      var divt = document.getElementById("bgimage");
+      divt.style.backgroundImage = bgimgurlt;
       layer.on({
         click: function (e) {
           $("#feature-title").html(feature.properties.NAME);
@@ -226,9 +226,9 @@ var ulu = L.geoJson(null, {
     if (feature.properties) {
 // "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
       var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADDRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
-      var bgimgurl = 'url(' + feature.properties.backimage + ')';
-      var div = document.getElementById("bgimage");
-      div.style.backgroundImage = bgimgurl;
+      var bgimgurlu = 'url(' + feature.properties.backimage + ')';
+      var divu = document.getElementById("bgimage");
+      divu.style.backgroundImage = bgimgurlu;
       layer.on({  
         click: function (e) {
           $("#feature-title").html(feature.properties.NAME);
@@ -274,9 +274,9 @@ var museums = L.geoJson(null, {
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
       var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
-      var bgimgurl = 'url(' + feature.properties.backimage + ')';
-      var div = document.getElementById("bgimage");
-      div.style.backgroundImage = bgimgurl;
+      var bgimgurlm = 'url(' + feature.properties.backimage + ')';
+      var divm = document.getElementById("bgimage");
+      divm.style.backgroundImage = bgimgurlm;
       layer.on({
         click: function (e) {
           $("#feature-title").html(feature.properties.NAME);
