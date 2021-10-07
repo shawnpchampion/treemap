@@ -48,7 +48,7 @@ $("#sidebar-hide-btn").click(function() {
   return false;
 });
 
-//side bar animation effect and map tile fixing
+//side bar animation effect and map tile adjustments
 function animateSidebar() {
   $("#sidebar").animate({
     width: "toggle"
@@ -57,7 +57,7 @@ function animateSidebar() {
   });
 }
 
-//map size fixing
+//map tile adjustments
 function sizeLayerControl() {
   $(".leaflet-control-layers").css("max-height", $("#map").height() - 50);
 }
@@ -66,11 +66,12 @@ function clearHighlight() {
   highlight.clearLayers();
 }
 
-//what to do with sidebar click; gets lat long and zooms in
+//when sidebar is clicked, gets lat-long and zooms in
 function sidebarClick(id) {
   var layer = markerClusters.getLayer(id);
   map.setView([layer.getLatLng().lat, layer.getLatLng().lng], 17);
   layer.fire("click");
+  
 //Hide sidebar and go to the map on small screens
   if (document.body.clientWidth <= 767) {
     $("#sidebar").hide();
@@ -78,12 +79,12 @@ function sidebarClick(id) {
   }
 }
 
-
+// Synch the sidebar with whats show on the screen
 function syncSidebar() {
-  /* Empty sidebar features */
+  /* Empty sidebar features first*/
   $("#feature-list tbody").empty();
 
-  /* Loop through theaters layer and add only features which are in the map bounds */
+  /* Then Loop through theaters layer and add only features which are in the map bounds */
   /* Contains icons size settings */
   theaters.eachLayer(function (layer) {
     if (map.hasLayer(theaterLayer)) {
@@ -111,7 +112,7 @@ function syncSidebar() {
     }
   });
 
-  /* Update list.js featureList */
+  // Update list.js featureList
   featureList = new List("features", {
     valueNames: ["feature-name"]
   });
@@ -120,7 +121,7 @@ function syncSidebar() {
   });
 }
 
-/* Basemap Layers */
+// Basemap Layers
 var cartoLight = L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://cartodb.com/attributions">CartoDB</a>'
@@ -137,9 +138,9 @@ var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
 
 
 
-/* Overlay Layers */
+// Overlay Layers
 
-//makes blue circle highlight on selected points
+//makes blue circle "highlight" on selected point
 
 var highlight = L.geoJson(null);
 var highlightStyle = {
@@ -151,57 +152,7 @@ var highlightStyle = {
 
 
 
-//Create a color dictionary based off of subway route_id
-var subwayColors = {"1":"#ff3135", "2":"#ff3135", "3":"ff3135", "4":"#009b2e",
-    "5":"#009b2e", "6":"#009b2e", "7":"#ce06cb", "A":"#fd9a00", "C":"#fd9a00",
-    "E":"#fd9a00", "SI":"#fd9a00","H":"#fd9a00", "Air":"#ffff00", "B":"#ffff00",
-    "D":"#ffff00", "F":"#ffff00", "M":"#ffff00", "G":"#9ace00", "FS":"#6e6e6e",
-    "GS":"#6e6e6e", "J":"#976900", "Z":"#976900", "L":"#969696", "N":"#ffff00",
-    "Q":"#ffff00", "R":"#ffff00" };
-
-var subwayLines = L.geoJson(null, {
-  style: function (feature) {
-      return {
-        color: subwayColors[feature.properties.route_id],
-        weight: 3,
-        opacity: 1
-      };
-  },
-  onEachFeature: function (feature, layer) {
-    if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Division</th><td>" + feature.properties.Division + "</td></tr>" + "<tr><th>Line</th><td>" + feature.properties.Line + "</td></tr>" + "<table>";
-      layer.on({
-        click: function (e) {
-          $("#feature-title").html(feature.properties.Line);
-          $("#feature-info").html(content);
-          $("#featureModal").modal("show");
-
-        }
-      });
-    }
-    layer.on({
-      mouseover: function (e) {
-        var layer = e.target;
-        layer.setStyle({
-          weight: 3,
-          color: "#00FFFF",
-          opacity: 1
-        });
-        if (!L.Browser.ie && !L.Browser.opera) {
-          layer.bringToFront();
-        }
-      },
-      mouseout: function (e) {
-        subwayLines.resetStyle(e.target);
-      }
-    });
-  }
-});
-$.getJSON("data/subways.geojson", function (data) {
-  subwayLines.addData(data);
-});
-
-/* Single marker cluster layer to hold all clusters */
+// Single marker cluster layer to hold all clusters
 var markerClusters = new L.MarkerClusterGroup({
   spiderfyOnMaxZoom: true,
   showCoverageOnHover: false,
@@ -209,7 +160,7 @@ var markerClusters = new L.MarkerClusterGroup({
   disableClusteringAtZoom: 16
 });
 
-/* Empty layer placeholder to add to layer control for listening when to add/remove theaters to markerClusters layer */
+// Empty layer placeholder to add to layer control for listening when to add/remove theaters to markerClusters layer
 var theaterLayer = L.geoJson(null);
 var theaters = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
@@ -339,6 +290,8 @@ $.getJSON("data/DOITT_MUSEUM_01_13SEPT2010.geojson", function (data) {
   museums.addData(data);
 });
 
+
+// Make the Leaflet Map
 map = L.map("map", {
   zoom: 16,
   center: [19.40893, -154.914],
@@ -347,7 +300,7 @@ map = L.map("map", {
   attributionControl: false
 });
 
-/* Layer control listeners that allow for a single markerClusters layer */
+// Layer control listeners that allow for a single markerClusters layer
 map.on("overlayadd", function(e) {
   if (e.layer === theaterLayer) {
     markerClusters.addLayer(theaters);
@@ -378,17 +331,17 @@ map.on("overlayremove", function(e) {
   }
 });
 
-/* Filter sidebar feature list to only show features in current map bounds */
+// Filter sidebar feature list to only show features in current map bounds
 map.on("moveend", function (e) {
   syncSidebar();
 });
 
-/* Clear feature highlight when map is clicked */
+// Clear feature highlight when map is clicked
 map.on("click", function(e) {
   highlight.clearLayers();
 });
 
-/* Attribution control */
+// Attribution control
 function updateAttribution(e) {
   $.each(map._layers, function(index, layer) {
     if (layer.getAttribution) {
@@ -413,7 +366,8 @@ var zoomControl = L.control.zoom({
   position: "bottomright"
 }).addTo(map);
 
-/* GPS enabled geolocation control set to follow the user's location */
+
+// GPS enabled geolocation control set to follow the user's location
 var locateControl = L.control.locate({
   position: "bottomright",
   drawCircle: true,
@@ -452,26 +406,26 @@ if (document.body.clientWidth <= 767) {
   var isCollapsed = false;
 }
 
+// Define Map Base Layers
 var baseLayers = {
   "Street Map": cartoLight,
   "Old Sat Map": Esri_WorldImagery,
   "New Sat Map": googleSat 
 };
 
+// Define Overlays
 var groupedOverlays = {
   "Points of Interest": {
     "<img src='assets/img/theater.png' width='24' height='24'>&nbsp;Theaters": theaterLayer,              //sizes for control box
     "<img src='assets/img/ulupin.png' width='24' height='24'>&nbsp;ulu": uluLayer,
     "<img src='assets/img/museum.png' width='24' height='24'>&nbsp;Museums": museumLayer
-  },
-  "Reference": {
-    "Subway Lines": subwayLines
-  }
 };
 
+// Create Control Box / Legend
 var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
   collapsed: isCollapsed
 }).addTo(map);
+
 
 /* Highlight search box text on click */
 $("#searchbox").click(function () {
@@ -489,7 +443,7 @@ $("#featureModal").on("hidden.bs.modal", function (e) {
   $(document).on("mouseout", ".feature-row", clearHighlight);
 });
 
-/* Typeahead search functionality */
+// Typeahead search functionality
 $(document).one("ajaxStop", function () {
   $("#loading").hide();
   sizeLayerControl();
