@@ -1,4 +1,4 @@
-var map, featureList, theaterSearch = [], uluSearch = [], museumSearch = [];
+var map, featureList, theaterSearch = [], uluSearch = [], banSearch = [];
 
 $(window).resize(function() {
   sizeLayerControl();
@@ -105,11 +105,11 @@ function syncSidebar() {
     }
   });
 
-  /* Loop through museums layer and add only features which are in the map bounds */
-  museums.eachLayer(function (layer) {
-    if (map.hasLayer(museumLayer)) {
+  /* Loop through ban layer and add only features which are in the map bounds */
+  ban.eachLayer(function (layer) {
+    if (map.hasLayer(banLayer)) {
       if (map.getBounds().contains(layer.getLatLng())) {
-        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/museum.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/banpin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       }
     }
   });
@@ -259,13 +259,13 @@ $.getJSON("data/ulu.geojson", function (data) {
 });
 
 
-/* Empty layer placeholder to add to layer control for listening when to add/remove museums to markerClusters layer */
-var museumLayer = L.geoJson(null);
-var museums = L.geoJson(null, {
+/* Empty layer placeholder to add to layer control for listening when to add/remove ban to markerClusters layer */
+var banLayer = L.geoJson(null);
+var ban = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
       icon: L.icon({
-        iconUrl: "assets/img/museum.png",
+        iconUrl: "assets/img/banpin.png",
         iconSize: [34, 34],                                   // map sizing
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
@@ -291,11 +291,11 @@ var museums = L.geoJson(null, {
           divm.style.backgroundRepeat = "no-repeat";
         }
       });
-      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/museum.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-      museumSearch.push({
+      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/banpin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+      banSearch.push({
         name: layer.feature.properties.NAME,
         address: layer.feature.properties.ADRESS1,
-        source: "Museums",
+        source: "ban",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
         lng: layer.feature.geometry.coordinates[0]
@@ -303,22 +303,10 @@ var museums = L.geoJson(null, {
     }
   }
 });
-$.getJSON("data/DOITT_MUSEUM_01_13SEPT2010.geojson", function (data) {
-  museums.addData(data);
-  map.addLayer(museumLayer);
+$.getJSON("data/ban.geojson", function (data) {
+  ban.addData(data);
+  map.addLayer(banLayer);
 });
-
-// Add background image to point-marker pop up
-//var bgimgurl = "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg";
-//var bgimgurl = "./assets/img/uluback.png";
-//var bgimgurl = 'url(' + feature.properties.backimage + ')';
-//var div = document.getElementById("bgimage");
-//div.style.backgroundImage = `url(${feature.properties.backimage})`;
-//div.style.backgroundImage = `url(${bgimgurl})`;
-//div.style.backgroundImage = bgimgurl;
-// div.style.width = "640px";
-// div.style.height = "100%";
-
 
 
 // Make the Leaflet Map
@@ -340,8 +328,8 @@ map.on("overlayadd", function(e) {
     markerClusters.addLayer(ulu);
     syncSidebar();
   }
-  if (e.layer === museumLayer) {
-    markerClusters.addLayer(museums);
+  if (e.layer === banLayer) {
+    markerClusters.addLayer(ban);
     syncSidebar();
   }
 });
@@ -355,8 +343,8 @@ map.on("overlayremove", function(e) {
     markerClusters.removeLayer(ulu);
     syncSidebar();
   }
-  if (e.layer === museumLayer) {
-    markerClusters.removeLayer(museums);
+  if (e.layer === banLayer) {
+    markerClusters.removeLayer(ban);
     syncSidebar();
   }
 });
@@ -448,7 +436,7 @@ var groupedOverlays = {
   "Points of Interest": {
     "<img src='assets/img/theater.png' width='24' height='24'>&nbsp;Theaters": theaterLayer,              //sizes for control box
     "<img src='assets/img/ulupin.png' width='24' height='24'>&nbsp;ulu": uluLayer,
-    "<img src='assets/img/museum.png' width='24' height='24'>&nbsp;Museums": museumLayer
+    "<img src='assets/img/banpin.png' width='24' height='24'>&nbsp;Banana": banLayer
   }
 };
 
@@ -500,13 +488,13 @@ $(document).one("ajaxStop", function () {
     limit: 10
   });
 
-  var museumsBH = new Bloodhound({
-    name: "Museums",
+  var banBH = new Bloodhound({
+    name: "ban",
     datumTokenizer: function (d) {
       return Bloodhound.tokenizers.whitespace(d.name);
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: museumSearch,
+    local: banSearch,
     limit: 10
   });
 
@@ -542,7 +530,7 @@ $(document).one("ajaxStop", function () {
   });
   theatersBH.initialize();
   uluBH.initialize();
-  museumsBH.initialize();
+  banBH.initialize();
   geonamesBH.initialize();
 
   /* instantiate the typeahead UI */
@@ -567,11 +555,11 @@ $(document).one("ajaxStop", function () {
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
     }
   }, {
-    name: "Museums",
+    name: "ban",
     displayKey: "name",
-    source: museumsBH.ttAdapter(),
+    source: banBH.ttAdapter(),
     templates: {
-      header: "<h4 class='typeahead-header'><img src='assets/img/museum.png' width='14' height='18'>&nbsp;Museums</h4>",
+      header: "<h4 class='typeahead-header'><img src='assets/img/banpin.png' width='14' height='18'>&nbsp;ban</h4>",
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
     }
   }, {
@@ -600,9 +588,9 @@ $(document).one("ajaxStop", function () {
         map._layers[datum.id].fire("click");
       }
     }
-    if (datum.source === "Museums") {
-      if (!map.hasLayer(museumLayer)) {
-        map.addLayer(museumLayer);
+    if (datum.source === "ban") {
+      if (!map.hasLayer(banLayer)) {
+        map.addLayer(banLayer);
       }
       map.setView([datum.lat, datum.lng], 17);
       if (map._layers[datum.id]) {
