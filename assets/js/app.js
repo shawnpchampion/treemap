@@ -1,4 +1,4 @@
-var map, featureList, theaterSearch = [], uluSearch = [], banSearch = [];
+var map, featureList, avoSearch = [], uluSearch = [], banSearch = [];
 
 $(window).resize(function() {
   sizeLayerControl();
@@ -86,12 +86,12 @@ function syncSidebar() {
   /* First Empty sidebar features */
   $("#feature-list tbody").empty();
 
-  /* Then Loop through theaters layer and add only features which are in the map bounds */
+  /* Then Loop through avo layer and add only features which are in the map bounds */
   /* Contains icons size settings */
-  theaters.eachLayer(function (layer) {
-    if (map.hasLayer(theaterLayer)) {
+  avo.eachLayer(function (layer) {
+    if (map.hasLayer(avoLayer)) {
       if (map.getBounds().contains(layer.getLatLng())) {
-        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/theater.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/avopin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       }
     }
   });
@@ -159,13 +159,13 @@ var markerClusters = new L.MarkerClusterGroup({
   disableClusteringAtZoom: 16
 });
 
-// Empty layer placeholder to add to layer control for listening when to add/remove theaters to markerClusters layer
-var theaterLayer = L.geoJson(null);
-var theaters = L.geoJson(null, {
+// Empty layer placeholder to add to layer control for listening when to add/remove avo to markerClusters layer
+var avoLayer = L.geoJson(null);
+var avo = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
         icon: L.icon({
-        iconUrl: "assets/img/theater.png",
+        iconUrl: "assets/img/avopin.png",
         iconSize: [34, 34],                                //map sizing
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
@@ -190,11 +190,11 @@ var theaters = L.geoJson(null, {
           divt.style.backgroundRepeat = "no-repeat";
         }
       });
-      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/theater.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-      theaterSearch.push({
+      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/avopin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+      avoSearch.push({
         name: layer.feature.properties.NAME,
         address: layer.feature.properties.ADDRESS1,
-        source: "Theaters",
+        source: "avo",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
         lng: layer.feature.geometry.coordinates[0]
@@ -202,9 +202,9 @@ var theaters = L.geoJson(null, {
     }
   }
 });
-$.getJSON("data/DOITT_THEATER_01_13SEPT2010.geojson", function (data) {
-  theaters.addData(data);
-  map.addLayer(theaterLayer);
+$.getJSON("data/avo.geojson", function (data) {
+  avo.addData(data);
+  map.addLayer(avoLayer);
 });
 
 
@@ -320,8 +320,8 @@ map = L.map("map", {
 
 // Layer control listeners that allow for a single markerClusters layer
 map.on("overlayadd", function(e) {
-  if (e.layer === theaterLayer) {
-    markerClusters.addLayer(theaters);
+  if (e.layer === avoLayer) {
+    markerClusters.addLayer(avo);
     syncSidebar();
   }
   if (e.layer === uluLayer) {
@@ -335,8 +335,8 @@ map.on("overlayadd", function(e) {
 });
 
 map.on("overlayremove", function(e) {
-  if (e.layer === theaterLayer) {
-    markerClusters.removeLayer(theaters);
+  if (e.layer === avoLayer) {
+    markerClusters.removeLayer(avo);
     syncSidebar();
   }
   if (e.layer === uluLayer) {
@@ -434,8 +434,8 @@ var baseLayers = {
 // Define Overlays
 var groupedOverlays = {
   "Points of Interest": {
-    "<img src='assets/img/theater.png' width='24' height='24'>&nbsp;Theaters": theaterLayer,              //sizes for control box
-    "<img src='assets/img/ulupin.png' width='24' height='24'>&nbsp;ulu": uluLayer,
+    "<img src='assets/img/avopin.png' width='24' height='24'>&nbsp;Avacado": avoLayer,              //sizes for control box
+    "<img src='assets/img/ulupin.png' width='24' height='24'>&nbsp;Ulu": uluLayer,
     "<img src='assets/img/banpin.png' width='24' height='24'>&nbsp;Banana": banLayer
   }
 };
@@ -468,13 +468,13 @@ $(document).one("ajaxStop", function () {
   sizeLayerControl();
 
 
-  var theatersBH = new Bloodhound({
-    name: "Theaters",
+  var avoBH = new Bloodhound({
+    name: "avo",
     datumTokenizer: function (d) {
       return Bloodhound.tokenizers.whitespace(d.name);
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: theaterSearch,
+    local: avoSearch,
     limit: 10
   });
   
@@ -528,7 +528,7 @@ $(document).one("ajaxStop", function () {
     },
     limit: 10
   });
-  theatersBH.initialize();
+  avoBH.initialize();
   uluBH.initialize();
   banBH.initialize();
   geonamesBH.initialize();
@@ -539,11 +539,11 @@ $(document).one("ajaxStop", function () {
     highlight: true,
     hint: false
   },{
-    name: "Theaters",
+    name: "avo",
     displayKey: "name",
-    source: theatersBH.ttAdapter(),
+    source: avoBH.ttAdapter(),
     templates: {
-      header: "<h4 class='typeahead-header'><img src='assets/img/theater.png' width='44' height='44'>&nbsp;Theaters</h4>", //unknown size
+      header: "<h4 class='typeahead-header'><img src='assets/img/avopin.png' width='44' height='44'>&nbsp;avo</h4>", //unknown size
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
     }
   }, {
@@ -570,9 +570,9 @@ $(document).one("ajaxStop", function () {
       header: "<h4 class='typeahead-header'><img src='assets/img/globe.png' width='25' height='25'>&nbsp;GeoNames</h4>"
     }
   }).on("typeahead:selected", function (obj, datum) {
-    if (datum.source === "Theaters") {
-      if (!map.hasLayer(theaterLayer)) {
-        map.addLayer(theaterLayer);
+    if (datum.source === "avo") {
+      if (!map.hasLayer(avoLayer)) {
+        map.addLayer(avoLayer);
       }
       map.setView([datum.lat, datum.lng], 17);
       if (map._layers[datum.id]) {
