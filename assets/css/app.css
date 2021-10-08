@@ -84,11 +84,11 @@ input[type="radio"], input[type="checkbox"] {
 
 .table {
   margin-bottom: 0px;
-  background-color: #FFFFFF;
+  background-color: transparent;
 }
 
 .table-striped>tbody>tr:nth-of-type(odd) {
-    background-color: #FFFFFF;
+    background-color: transparent;
     border-style: hidden!important;
 }
 
@@ -100,15 +100,10 @@ input[type="radio"], input[type="checkbox"] {
     border: 0px solid #ddd;
 }
 
-/*
-.modal-content {
-    background-image: url("https://www.w3schools.com/w3images/photographer.jpg");
-}
-*/
 
 .modal-title {
     margin: 0;
-    float: right;
+    padding-left: 50%;
     line-height: 1.42857143;
 }
 
