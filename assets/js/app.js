@@ -87,11 +87,11 @@ function syncSidebar() {
   $("#feature-list tbody").empty();
 
   /* Then Loop through avo layer and add only features which are in the map bounds */
-  /* Contains icons size settings */
+  /* Contains sidebar icons size settings */
   avo.eachLayer(function (layer) {
     if (map.hasLayer(avoLayer)) {
       if (map.getBounds().contains(layer.getLatLng())) {
-        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/avopin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="16" src="assets/img/avopin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       }
     }
   });
@@ -100,7 +100,7 @@ function syncSidebar() {
   ulu.eachLayer(function (layer) {
     if (map.hasLayer(uluLayer)) {
       if (map.getBounds().contains(layer.getLatLng())) {
-        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/ulupin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="16" src="assets/img/ulupin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       }
     }
   });
@@ -109,7 +109,7 @@ function syncSidebar() {
   ban.eachLayer(function (layer) {
     if (map.hasLayer(banLayer)) {
       if (map.getBounds().contains(layer.getLatLng())) {
-        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/banpin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="16" src="assets/img/banpin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       }
     }
   });
@@ -176,7 +176,7 @@ var avo = L.geoJson(null, {
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADDRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
+      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Harvest</th><td>" + feature.properties.TEL + "</td></tr>" + "<table>";
       layer.on({
         click: function (e) {
           $("#feature-title").html(feature.properties.NAME);
@@ -184,17 +184,16 @@ var avo = L.geoJson(null, {
           $("#feature-info").html(content);
           $("#featureModal").modal("show");
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-          var bgimgurlt = 'url(' + feature.properties.backimage + ')';
-          var divt = document.getElementById("bgimage");
-          divt.style.backgroundImage = bgimgurlt;
-          divt.style.backgroundRepeat = "no-repeat";
-          divt.style.backgroundSize = "contain";
+          var bgimgurla = 'url(' + feature.properties.backimage + ')';
+          var diva = document.getElementById("bgimage");
+          diva.style.backgroundImage = bgimgurla;
+          diva.style.backgroundRepeat = "no-repeat";
+          diva.style.backgroundSize = "contain";
         }
       });
-      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/avopin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="16" src="assets/img/avopin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       avoSearch.push({
         name: layer.feature.properties.NAME,
-        address: layer.feature.properties.ADDRESS1,
         source: "avo",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
@@ -226,8 +225,7 @@ var ulu = L.geoJson(null, {
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
-// "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADDRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
+      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Harvest</th><td>" + feature.properties.TEL + "</td></tr>" + "<table>";
 
       layer.on({  
         click: function (e) {
@@ -243,10 +241,9 @@ var ulu = L.geoJson(null, {
           divu.style.backgroundSize = "contain";
         }
       });
-      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/ulupin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="16" src="assets/img/ulupin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       uluSearch.push({
         name: layer.feature.properties.NAME,
-        address: layer.feature.properties.ADDRESS1,
         source: "ulu",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
@@ -278,7 +275,7 @@ var ban = L.geoJson(null, {
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
+      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Harvest</th><td>" + feature.properties.TEL + "</td></tr>" + "<table>";
 
       layer.on({
         click: function (e) {
@@ -294,10 +291,9 @@ var ban = L.geoJson(null, {
           divm.style.backgroundSize = "contain";
         }
       });
-      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/banpin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="16" src="assets/img/banpin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       banSearch.push({
         name: layer.feature.properties.NAME,
-        address: layer.feature.properties.ADRESS1,
         source: "ban",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
@@ -362,63 +358,10 @@ map.on("click", function(e) {
   highlight.clearLayers();
 });
 
-// Attribution control
-function updateAttribution(e) {
-  $.each(map._layers, function(index, layer) {
-    if (layer.getAttribution) {
-      $("#attribution").html((layer.getAttribution()));
-    }
-  });
-}
-map.on("layeradd", updateAttribution);
-map.on("layerremove", updateAttribution);
-
-var attributionControl = L.control({
-  position: "bottomright"
-});
-attributionControl.onAdd = function (map) {
-  var div = L.DomUtil.create("div", "leaflet-control-attribution");
-  div.innerHTML = "<span class='hidden-xs'>Developed by <a href='http://bryanmcbride.com'>bryanmcbride.com</a> | </span><a href='#' onclick='$(\"#attributionModal\").modal(\"show\"); return false;'>Attribution</a>";
-  return div;
-};
-map.addControl(attributionControl);
-
 var zoomControl = L.control.zoom({
   position: "bottomright"
 }).addTo(map);
 
-
-// GPS enabled geolocation control set to follow the user's location
-var locateControl = L.control.locate({
-  position: "bottomright",
-  drawCircle: true,
-  follow: true,
-  setView: true,
-  keepCurrentZoomLevel: true,
-  markerStyle: {
-    weight: 1,
-    opacity: 0.8,
-    fillOpacity: 0.8
-  },
-  circleStyle: {
-    weight: 1,
-    clickable: false
-  },
-  icon: "fa fa-location-arrow",
-  metric: false,
-  strings: {
-    title: "My location",
-    popup: "You are within {distance} {unit} from this point",
-    outsideMapBoundsMsg: "You seem located outside the boundaries of the map"
-  },
-  locateOptions: {
-    maxZoom: 18,
-    watch: true,
-    enableHighAccuracy: true,
-    maximumAge: 10000,
-    timeout: 10000
-  }
-}).addTo(map);
 
 /* Larger screens get expanded layer control and visible sidebar */
 if (document.body.clientWidth <= 767) {
