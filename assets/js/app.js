@@ -188,6 +188,7 @@ var avo = L.geoJson(null, {
           var divt = document.getElementById("bgimage");
           divt.style.backgroundImage = bgimgurlt;
           divt.style.backgroundRepeat = "no-repeat";
+          divt.style.backgroundSize = "contain";
         }
       });
       $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/avopin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
@@ -239,6 +240,7 @@ var ulu = L.geoJson(null, {
           var divu = document.getElementById("bgimage");
           divu.style.backgroundImage = bgimgurlu;
           divu.style.backgroundRepeat = "no-repeat";
+          divu.style.backgroundSize = "contain";
         }
       });
       $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/ulupin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
@@ -289,6 +291,7 @@ var ban = L.geoJson(null, {
           var divm = document.getElementById("bgimage");
           divm.style.backgroundImage = bgimgurlm;
           divm.style.backgroundRepeat = "no-repeat";
+          divm.style.backgroundSize = "contain";
         }
       });
       $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/banpin.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
