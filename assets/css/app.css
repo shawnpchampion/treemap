@@ -96,6 +96,10 @@ input[type="radio"], input[type="checkbox"] {
      border: 0px solid #ddd;
 }
 
+.table-bordered {
+    border: 0px solid #ddd;
+}
+
 /*
 .modal-content {
     background-image: url("https://www.w3schools.com/w3images/photographer.jpg");
