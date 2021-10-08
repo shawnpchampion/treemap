@@ -150,12 +150,10 @@ var highlightStyle = {
 //  fillOpacity: 0.7,
 //  radius: 5
 //};
-icon: L.icon({
         iconUrl: "assets/img/avopin.png",
         iconSize: [64, 64],                                //map sizing
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
-      }),
 };
 // Single marker cluster layer to hold all clusters
 var markerClusters = new L.MarkerClusterGroup({
