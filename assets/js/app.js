@@ -381,8 +381,8 @@ var baseLayers = {
 var groupedOverlays = {
   "Points of Interest": {
     "<img src='assets/img/avopin.png' width='24' height='24'>&nbsp;Avacado": avoLayer,              //sizes for control box
-    "<img src='assets/img/ulupin.png' width='24' height='24'>&nbsp;Ulu": uluLayer,
-    "<img src='assets/img/banpin.png' width='24' height='24'>&nbsp;Banana": banLayer
+    "<img src='assets/img/banpin.png' width='24' height='24'>&nbsp;Banana": banLayer,
+    "<img src='assets/img/ulupin.png' width='24' height='24'>&nbsp;Ulu": uluLayer
   }
 };
 
