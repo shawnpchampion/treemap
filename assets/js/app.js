@@ -1,4 +1,4 @@
-var map, featureList, avoSearch = [], uluSearch = [], banSearch = [];
+var map, featureList, avoSearch = [], banSearch = [], uluSearch = [];
 
 $(window).resize(function() {
   sizeLayerControl();
@@ -73,7 +73,7 @@ function sidebarClick(id) {
   map.setView([layer.getLatLng().lat, layer.getLatLng().lng], 20);
   layer.fire("click");
   
-//Hide sidebar and go to the map on small screens
+//Hide sidebar on click if small screens
   if (document.body.clientWidth <= 767) {
     $("#sidebar").hide();
     map.invalidateSize();
@@ -348,7 +348,7 @@ map.on("overlayremove", function(e) {
   }
 });
 
-// Filter sidebar feature list to only show features in current map bounds
+// Sync sidebar list to only show features in current map bounds
 map.on("moveend", function (e) {
   syncSidebar();
 });
@@ -358,6 +358,7 @@ map.on("click", function(e) {
   highlight.clearLayers();
 });
 
+// Zoom buttons on map
 var zoomControl = L.control.zoom({
   position: "bottomright"
 }).addTo(map);
