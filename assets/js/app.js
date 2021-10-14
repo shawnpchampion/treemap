@@ -225,7 +225,7 @@ var ulu = L.geoJson(null, {
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Harvest</th><td>" + feature.properties.TEL + "</td></tr>" + "<table>";
+      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Hawaiian Na</th><td>" + feature.properties.hname + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Harvest</th><td>" + feature.properties.TEL + "</td></tr>" + "<table>";
 
       layer.on({  
         click: function (e) {
@@ -275,7 +275,7 @@ var ban = L.geoJson(null, {
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Harvest</th><td>" + feature.properties.TEL + "</td></tr>" + "<table>";
+      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Hawaiian</th><td>" + feature.properties.hname + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Harvest</th><td>" + feature.properties.TEL + "</td></tr>" + "<table>";
 
       layer.on({
         click: function (e) {
