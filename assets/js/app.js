@@ -204,7 +204,7 @@ var avo = L.geoJson(null, {
 });
 $.getJSON("data/avo.geojson", function (data) {
   avo.addData(data);
-  map.addLayer(avoLayer);
+ // map.addLayer(avoLayer);
 });
 
 
