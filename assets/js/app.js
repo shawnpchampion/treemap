@@ -312,7 +312,7 @@ $.getJSON("data/ban.geojson", function (data) {
 map = L.map("map", {
   zoom: 16,
   center: [19.40893, -154.914],
-  layers: [cartoLight, markerClusters, highlight],
+  layers: [googleSat, markerClusters, highlight],
   zoomControl: false,
   attributionControl: false
 });
@@ -373,9 +373,9 @@ if (document.body.clientWidth <= 767) {
 
 // Define Map Base Layers
 var baseLayers = {
-  "Street Map": cartoLight,
   //"Old Sat Map": Esri_WorldImagery,
-  "Satellite Map": googleSat 
+  "Satellite Map": googleSat,
+  "Street Map": cartoLight
 };
 
 // Define Overlays
