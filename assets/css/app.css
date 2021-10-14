@@ -229,6 +229,13 @@ input[type="radio"], input[type="checkbox"] {
     color: #FFFFFF;
   }
 }
+
+@media (min-width: 768px)
+.modal-dialog {
+    width: 450px;
+    margin: 30px auto;
+}
+
 /* Print Handling */
 @media print {
   .navbar {
