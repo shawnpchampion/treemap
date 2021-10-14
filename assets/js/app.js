@@ -176,7 +176,7 @@ var avo = L.geoJson(null, {
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Hawaiian Name</th><td>" + feature.properties.hname + "</td></tr>" + "<tr><th>Canoe Plant</th><td>" + feature.properties.cplant + "</td></tr>" + "<tr><th>Harvest</th><td>" + feature.properties.TEL + "</td></tr>" + "<table>";
+      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Hawaiian N</th><td>" + feature.properties.hname + "</td></tr>" + "<tr><th>Canoe Plant</th><td>" + feature.properties.cplant + "</td></tr>" + "<tr><th>Harvest</th><td>" + feature.properties.TEL + "</td></tr>" + "<table>";
       layer.on({
         click: function (e) {
           $("#feature-title").html(feature.properties.NAME);
