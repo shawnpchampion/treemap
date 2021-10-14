@@ -176,7 +176,7 @@ var avo = L.geoJson(null, {
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Hawaiian N</th><td>" + feature.properties.hname + "</td></tr>" + "<tr><th>Canoe Plant</th><td>" + feature.properties.cplant + "</td></tr>" + "<tr><th>Harvest</th><td>" + feature.properties.TEL + "</td></tr>" + "<table>";
+      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Hawaiian Name:</th><td>" + feature.properties.hname + "</td></tr>" + "<tr><th>Canoe Plant:</th><td>" + feature.properties.cplant + "</td></tr>" + "<tr><th>Harvest:</th><td>" + feature.properties.harvest + "</td></tr>" + "<table>";
       layer.on({
         click: function (e) {
           $("#feature-title").html(feature.properties.NAME);
@@ -225,7 +225,7 @@ var ulu = L.geoJson(null, {
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Hawaiian Na</th><td>" + feature.properties.hname + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Harvest</th><td>" + feature.properties.TEL + "</td></tr>" + "<table>";
+      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Hawaiian Name:</th><td>" + feature.properties.hname + "</td></tr>" + "<tr><th>Canoe Plant:</th><td>" + feature.properties.cplant + "</td></tr>" + "<tr><th>Harvest:</th><td>" + feature.properties.harvest + "</td></tr>" + "<table>";
 
       layer.on({  
         click: function (e) {
@@ -275,7 +275,7 @@ var ban = L.geoJson(null, {
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Hawaiian</th><td>" + feature.properties.hname + "</td></tr>" + "<tr><th>Group</th><td>" + feature.properties.group + "</td></tr>" + "<tr><th>Harvest</th><td>" + feature.properties.TEL + "</td></tr>" + "<table>";
+      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Hawaiian Name:</th><td>" + feature.properties.hname + "</td></tr>" + "<tr><th>Canoe Plant:</th><td>" + feature.properties.cplant + "</td></tr>" + "<tr><th>Harvest:</th><td>" + feature.properties.harvest + "</td></tr>" + "<table>";
 
       layer.on({
         click: function (e) {
@@ -374,8 +374,8 @@ if (document.body.clientWidth <= 767) {
 // Define Map Base Layers
 var baseLayers = {
   "Street Map": cartoLight,
-  "Old Sat Map": Esri_WorldImagery,
-  "New Sat Map": googleSat 
+  //"Old Sat Map": Esri_WorldImagery,
+  "Satellite Map": googleSat 
 };
 
 // Define Overlays
