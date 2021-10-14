@@ -312,8 +312,7 @@ $.getJSON("data/ban.geojson", function (data) {
 map = L.map("map", {
   zoom: 16,
   center: [19.40893, -154.914],
-  //layers: [googleSat, markerClusters, highlight],
-  layers: [googleSat, highlight],
+  layers: [googleSat, markerClusters, highlight],
   zoomControl: false,
   attributionControl: false
 });
