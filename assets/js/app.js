@@ -73,8 +73,8 @@ function sidebarClick(id) {
   map.setView([layer.getLatLng().lat, layer.getLatLng().lng], 20);
   layer.fire("click");
   
-//Hide sidebar on click if small screens
-  if (document.body.clientWidth <= 767) {
+//Hide sidebar if small screens
+  if (document.body.clientWidth <= 1767) {
     $("#sidebar").hide();
     map.invalidateSize();
   }
