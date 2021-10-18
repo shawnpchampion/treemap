@@ -166,7 +166,7 @@ var avo = L.geoJson(null, {
     return L.marker(latlng, {
         icon: L.icon({
         iconUrl: "assets/img/greeno.png",
-        iconSize: [34, 34],                                //map sizing
+        iconSize: [14, 14],                                //map sizing
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
       }),
@@ -215,7 +215,7 @@ var ulu = L.geoJson(null, {
     return L.marker(latlng, {
       icon: L.icon({
         iconUrl: "assets/img/blueo.png",
-        iconSize: [24, 24],                                //map sizing
+        iconSize: [14, 14],                                //map sizing
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
       }),
