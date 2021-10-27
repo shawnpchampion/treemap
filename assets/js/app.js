@@ -165,7 +165,7 @@ var avo = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
         icon: L.icon({
-        iconUrl: "assets/img/greeno.png",
+        iconUrl: "assets/img/avopin.png",
         iconSize: [14, 14],                                //map sizing
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
@@ -214,7 +214,7 @@ var ulu = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
       icon: L.icon({
-        iconUrl: "assets/img/blueo.png",
+        iconUrl: "assets/img/ulupin.png",
         iconSize: [14, 14],                                //map sizing
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
@@ -264,7 +264,7 @@ var ban = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
       icon: L.icon({
-        iconUrl: "assets/img/yellowo.png",
+        iconUrl: "assets/img/banpin.png",
         iconSize: [14, 14],                                   // map sizing
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
