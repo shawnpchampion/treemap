@@ -215,7 +215,7 @@ var ulu = L.geoJson(null, {
     return L.marker(latlng, {
       icon: L.icon({
         iconUrl: "assets/img/ulupin.png",
-        iconSize: [14, 14],                                //map sizing
+        iconSize: [24, 24],                                //map sizing
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
       }),
@@ -265,7 +265,7 @@ var ban = L.geoJson(null, {
     return L.marker(latlng, {
       icon: L.icon({
         iconUrl: "assets/img/banpin.png",
-        iconSize: [14, 14],                                   // map sizing
+        iconSize: [24, 24],                                   // map sizing
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
       }),
